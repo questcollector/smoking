@@ -11,10 +11,12 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.3.5.RELEASE</spring.version>
+    <security.version>4.2.14.RELEASE</security.version>
     <jackson2.version>2.9.9</jackson2.version>
     <postgresql.version>42.2.5</postgresql.version>
     <postgis.version>2.3.0</postgis.version>
     <geotools.version>21.1</geotools.version>
+    <hibernate.version>5.4.4.Final</hibernate.version>
   </properties>
 
   <repositories>
@@ -33,6 +35,15 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>1.10.19</version>
+        <scope>test</scope>
+    </dependency>
+    
     
     <!-- spring setting -->
     <dependency>
@@ -75,6 +86,40 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>${spring.version}</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- spring security setting -->
+    
+    <dependency> 
+        <groupId>org.springframework.security</groupId> 
+        <artifactId>spring-security-core</artifactId> 
+        <version>${security.version}</version> 
+    </dependency> 
+    
+    <dependency> 
+        <groupId>org.springframework.security</groupId> 
+        <artifactId>spring-security-web</artifactId> 
+        <version>${security.version}</version> 
+    </dependency> 
+    
+    <dependency> 
+        <groupId>org.springframework.security</groupId> 
+        <artifactId>spring-security-config</artifactId> 
+        <version>${security.version}</version> 
+    </dependency> 
+    
+    <dependency> 
+        <groupId>org.springframework.security</groupId> 
+        <artifactId>spring-security-taglibs</artifactId> 
+        <version>${security.version}</version> 
+    </dependency> 
+    
+    <dependency> 
+        <groupId>org.springframework.security</groupId> 
+        <artifactId>spring-security-test</artifactId> 
+        <version>${security.version}</version>
+        <scope>test</scope>
     </dependency>
     
     <!-- postgresql -->
@@ -110,6 +155,20 @@
        <version>${geotools.version}</version>
     </dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>${hibernate.version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-spatial</artifactId>
+        <version>${hibernate.version}</version>
+    </dependency>
+        
     <!-- apache.commons/commons-dbcp2 -->
     <dependency>
         <groupId>org.apache.commons</groupId>
@@ -140,37 +199,48 @@
     </dependency>
     
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
     </dependency>
      
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version> 
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version> 
     </dependency>
     
-    <!-- jackson-databind -->
+    <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>persistence-api</artifactId>
+        <version>1.0</version>
+    </dependency>
+        
+    <!--     
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
         <version>${jackson2.version}</version>
     </dependency>
        
-    <!-- jackson-datatype-jdk8 -->
     <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jdk8</artifactId>
         <version>${jackson2.version}</version>
     </dependency>
     
-    <!-- jackson-datatype-jsr310 -->
     <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${jackson2.version}</version>
+    </dependency> -->
+    
+    <!-- https://mvnrepository.com/artifact/com.bedatadriven/jackson-datatype-jts -->
+    <dependency>
+        <groupId>com.bedatadriven</groupId>
+        <artifactId>jackson-datatype-jts</artifactId>
+        <version>2.4</version>
     </dependency>
     
     <!-- slf4j-api -->
@@ -206,6 +276,17 @@
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
+            </configuration>
+        </plugin> 
+               
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+                <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                <warName>smoking</warName>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
         </plugin>
     </plugins>  

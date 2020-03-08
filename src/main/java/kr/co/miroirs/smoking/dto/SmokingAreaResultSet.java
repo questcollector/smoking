@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.postgresql.util.PGobject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 
 public class SmokingAreaResultSet implements ResultSetExtractor<List<SmokingArea>> {
 
@@ -17,9 +21,18 @@ public class SmokingAreaResultSet implements ResultSetExtractor<List<SmokingArea
         
         while(rs.next()) {
             SmokingArea smokingArea = new SmokingArea();
-            smokingArea.setId(rs.getInt("id"));
-            smokingArea.setGeom(rs.getObject("geom", PGobject.class));
-            smokingArea.setClusterId(rs.getInt("cluster_id"));
+            smokingArea.setId(rs.getInt("id"));         
+            
+            String geom = rs.getString("geom");
+            Geometry geometry;
+            
+            try {
+                geometry = new WKTReader().read(geom);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            
+            smokingArea.setGeometry((Point) geometry);
             smokingArea.setCount(rs.getInt("count"));
             smokingArea.setValue(rs.getDouble("value"));
             smokingArea.setDayMorning(rs.getInt("dayMorning"));

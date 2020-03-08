@@ -1,12 +1,9 @@
 package kr.co.miroirs.smoking.config;
 
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,23 +13,26 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.bedatadriven.jackson.datatype.jts.JtsModule;
+
 import kr.co.miroirs.smoking.interceptor.LogInterceptor;
-import kr.co.miroirs.smoking.objectMapper.GeoJsonObjectMapper;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages={"kr.co.miroirs.smoking.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
+    private static final int CACHE_PERIOD = 31556926; // a year
+    private static final int MAX_FILE_SIZE = 1024 * 1024 * 20; // 20MB
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
-        registry.addResourceHandler("/htmls/**").addResourceLocations("/htmls/").setCachePeriod(31556926);
-        registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(31556926);
-        
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(CACHE_PERIOD);
+        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(CACHE_PERIOD);
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(CACHE_PERIOD);
+        registry.addResourceHandler("/htmls/**").addResourceLocations("/htmls/").setCachePeriod(CACHE_PERIOD);
+        registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(CACHE_PERIOD);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     public MultipartResolver multipartResolver() {
         org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = 
                 new org.springframework.web.multipart.commons.CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize((1024 * 1024 * 20));
+        multipartResolver.setMaxUploadSize(MAX_FILE_SIZE);
         return multipartResolver;
     }
 
@@ -67,18 +67,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
     
     @Bean
-    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter(){
-        // reference: https://multifrontgarden.tistory.com/172 [우리집앞마당]
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(new GeoJsonObjectMapper());
-
-        return converter;
+    public Jackson2ObjectMapperBuilder objectMapperBuilder() {
+            Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+            builder.modulesToInstall(new JtsModule());
+            return builder;
     }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // reference: https://multifrontgarden.tistory.com/172 [우리집앞마당]
-        converters.add(jackson2HttpMessageConverter());
-    }
-
 }

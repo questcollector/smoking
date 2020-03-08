@@ -1,19 +1,7 @@
-package kr.co.miroirs.smoking.dto;
+package kr.co.miroirs.smoking.api.object;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+public class SmokingAreaProperties {
 
-import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vividsolutions.jts.geom.Point;
-
-@Entity
-public class SmokingArea {
-
-    @JsonSerialize(using = GeometrySerializer.class)
-    private Point geometry;
-    
-    @Id
     private int id;
     private int dayMorning;
     private int dayNoon;
@@ -27,13 +15,6 @@ public class SmokingArea {
     private int endNight;
     private int count;
     private double value;
-    
-    public Point getGeometry() {
-        return geometry;
-    }
-    public void setGeometry(Point geom) {
-        this.geometry = geom;
-    }
     public int getId() {
         return id;
     }
@@ -112,13 +93,14 @@ public class SmokingArea {
     public void setValue(double value) {
         this.value = value;
     }
-    
     @Override
     public String toString() {
-        return "SmokingArea [geom=" + geometry + ", id=" + id + ", dayMorning=" + dayMorning + ", dayNoon=" + dayNoon
+        return "SmokingAreaProperties [id=" + id + ", dayMorning=" + dayMorning + ", dayNoon=" + dayNoon
                 + ", dayAfternoon=" + dayAfternoon + ", dayEvening=" + dayEvening + ", dayNight=" + dayNight
                 + ", endMorning=" + endMorning + ", endNoon=" + endNoon + ", endAfternoon=" + endAfternoon
                 + ", endEvening=" + endEvening + ", endNight=" + endNight + ", count=" + count + ", value=" + value
                 + "]";
     }
+    
+    
 }

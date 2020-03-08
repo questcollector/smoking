@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.miroirs.smoking.dao.SmokingAreaDao;
+import kr.co.miroirs.smoking.dto.BuildingCluster;
 import kr.co.miroirs.smoking.dto.SmokingArea;
 import kr.co.miroirs.smoking.service.SmokingService;
 
@@ -23,5 +24,10 @@ public class SmokingServiceImpl implements SmokingService{
     @Override
     public List<SmokingArea> getSmokingAreaP100() {
         return smokingAreaDao.selectP100();
+    }
+
+    @Override
+    public List<BuildingCluster> getBuildingCluster() {
+        return smokingAreaDao.selectBuildingCluster();
     }
 }
