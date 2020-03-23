@@ -1,7 +1,7 @@
 package kr.co.miroirs.smoking.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
 
 import java.util.List;
 
@@ -66,6 +66,6 @@ public class SqlTest {
     public void userTest() {
         UserDomain user = (UserDomain) userService.loadUserByUsername("ADMIN");
         logger.debug("id: {}, password: {}", user.getUsername(), user.getPassword());
-        assertSame("ADMIN", user.getUsername());
+        assertEquals("ADMIN", user.getUsername());
     }
 }
