@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,7 +32,6 @@ public class SqlTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Test
-    @Ignore
     public void getSmokingAreaP015Test() {
         try {
             List<SmokingArea> p015 = smokingService.getSmokingAreaP015();
@@ -47,12 +45,10 @@ public class SqlTest {
     }
     
     @Test
-    @Ignore
-    public void polygonTest() {
-        
+    public void polygonTest() {        
         try {
             List<BuildingCluster> buildingClusters = smokingService.getBuildingCluster();
-            
+            assertNotNull(buildingClusters);
             logger.debug("{}", buildingClusters.get(0));            
             
         } catch(Exception e) {
