@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,6 +21,7 @@ import kr.co.miroirs.smoking.config.ApplicationConfig;
 import kr.co.miroirs.smoking.config.WebMvcContextConfiguration;
 import kr.co.miroirs.smoking.controller.DocumentDownloadController;
 import kr.co.miroirs.smoking.controller.SmokingApiController;
+import kr.co.miroirs.smoking.service.DownloadService;
 import kr.co.miroirs.smoking.service.SmokingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,42 +31,28 @@ public class ApiTest {
 
     @Mock
     SmokingService smokingServiceMock;
+    @Mock
+    DownloadService downloadServiceMock;
+    
     @InjectMocks
     private SmokingApiController smokingApiController;
     @InjectMocks
     private DocumentDownloadController downloadController;
     
-    private MockMvc mockMvc;
+    private MockMvc mockMvcApi;
     
     @Before
-    @Ignore
-    public void setUpApi() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders
+        mockMvcApi = MockMvcBuilders
                 .standaloneSetup(smokingApiController)
-                .addFilter(new CharacterEncodingFilter("UTF-8"))
-                .build();
-    }
-    
-    @Before
-    public void setUpDownload() {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(downloadController)
                 .addFilter(new CharacterEncodingFilter("UTF-8"))
                 .build();
     }
 
     @Test
-    @Ignore
     public void testSmokingApiController() throws Exception {
-        mockMvc.perform(get("/api/smokingArea"))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }   
-    @Test
-    public void testDownloadController() throws Exception {
-        mockMvc.perform(get("/download?fileId=1"))
+        mockMvcApi.perform(get("/api/smokingArea"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
