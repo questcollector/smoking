@@ -36,13 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/pdf/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
+            .antMatchers("/").permitAll()
+            .antMatchers("/api/smokingArea").permitAll()
+            .antMatchers("/download").permitAll()
             .anyRequest().authenticated()
                 .and()
             .formLogin()
