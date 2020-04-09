@@ -16,10 +16,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.miroirs.smoking.config.ApplicationConfig;
 import kr.co.miroirs.smoking.dto.BuildingCluster;
+import kr.co.miroirs.smoking.dto.FileInfo;
 import kr.co.miroirs.smoking.dto.SmokingArea;
 import kr.co.miroirs.smoking.security.config.SecurityConfig;
 import kr.co.miroirs.smoking.security.dto.UserDomain;
 import kr.co.miroirs.smoking.security.service.UserService;
+import kr.co.miroirs.smoking.service.DownloadService;
 import kr.co.miroirs.smoking.service.SmokingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +32,8 @@ public class SqlTest {
     private SmokingService smokingService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DownloadService downloadService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Test
@@ -68,4 +72,13 @@ public class SqlTest {
         logger.debug("id: {}, password: {}", user.getUsername(), user.getPassword());
         assertEquals("ADMIN", user.getUsername());
     }
+    
+    @Test
+    public void fileInfoTest() {
+        FileInfo fileInfo = downloadService.getFileInfo(1);
+        logger.debug("{}", fileInfo);
+        assertNotNull(fileInfo);
+    }
+    
+    
 }
