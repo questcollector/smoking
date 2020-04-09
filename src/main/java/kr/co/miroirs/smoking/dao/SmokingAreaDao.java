@@ -1,5 +1,7 @@
 package kr.co.miroirs.smoking.dao;
 
+import static kr.co.miroirs.smoking.dao.Select.*;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -11,7 +13,6 @@ import kr.co.miroirs.smoking.dto.BuildingCluster;
 import kr.co.miroirs.smoking.dto.BuildingClusterResultSet;
 import kr.co.miroirs.smoking.dto.SmokingArea;
 import kr.co.miroirs.smoking.dto.SmokingAreaResultSet;
-import kr.co.miroirs.smoking.query.Select;
 
 @Repository
 public class SmokingAreaDao {
@@ -23,12 +24,12 @@ public class SmokingAreaDao {
     }
     
     public List<SmokingArea> selectP015() {
-        return jdbc.query(Select.P015, new SmokingAreaResultSet());
+        return jdbc.query(SELECT_P015, new SmokingAreaResultSet());
     }
     public List<SmokingArea> selectP100() {
-        return jdbc.query(Select.P100, new SmokingAreaResultSet());
+        return jdbc.query(SELECT_P100, new SmokingAreaResultSet());
     }
     public List<BuildingCluster> selectBuildingCluster() {
-        return jdbc.query(Select.BUILDING_CLUSTER, new BuildingClusterResultSet());
+        return jdbc.query(SELECT_BUILDING_CLUSTER, new BuildingClusterResultSet());
     }
 }

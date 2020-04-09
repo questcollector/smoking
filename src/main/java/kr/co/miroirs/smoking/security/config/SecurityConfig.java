@@ -44,9 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .anyRequest().authenticated()
-            .and()
+                .and()
             .formLogin()
-            .and()
+            //.loginPage("/login")
+            .permitAll()
+                .and()
+            .logout()
+            .invalidateHttpSession(true)
+                .and()
             .httpBasic();
     }   
     

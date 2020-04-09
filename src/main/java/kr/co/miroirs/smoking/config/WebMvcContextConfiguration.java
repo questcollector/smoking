@@ -33,6 +33,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(CACHE_PERIOD);
         registry.addResourceHandler("/htmls/**").addResourceLocations("/htmls/").setCachePeriod(CACHE_PERIOD);
         registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(CACHE_PERIOD);
+        registry.addResourceHandler("/pdf/**").addResourceLocations("/pdf/").setCachePeriod(CACHE_PERIOD);
     }
 
     @Override
