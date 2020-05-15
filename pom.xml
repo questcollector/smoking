@@ -10,7 +10,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>4.3.5.RELEASE</spring.version>
+    <spring.version>5.2.4.RELEASE</spring.version>
     <security.version>4.2.14.RELEASE</security.version>
     <jackson2.version>2.9.9</jackson2.version>
     <postgresql.version>42.2.5</postgresql.version>
