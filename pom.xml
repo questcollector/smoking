@@ -15,15 +15,15 @@
     <jackson2.version>2.9.9</jackson2.version>
     <postgresql.version>42.2.5</postgresql.version>
     <postgis.version>2.3.0</postgis.version>
-    <geotools.version>21.1</geotools.version>
+    <geotools.version>23.0</geotools.version>
     <hibernate.version>5.4.4.Final</hibernate.version>
   </properties>
 
   <repositories>
     <repository>
         <id>osgeo</id>
-        <name>Open Source Geospatial Foundation Repository</name>
-        <url>https://download.osgeo.org/webdav/geotools/</url>
+        <name>OSGeo Release Repository</name>
+        <url>https://repo.osgeo.org/repository/release/</url>
     </repository>
   </repositories>
 
@@ -103,7 +103,7 @@
         <version>${security.version}</version> 
     </dependency> 
     
-    <dependency> 
+    <dependency>
         <groupId>org.springframework.security</groupId> 
         <artifactId>spring-security-config</artifactId> 
         <version>${security.version}</version> 
@@ -216,25 +216,6 @@
         <artifactId>persistence-api</artifactId>
         <version>1.0</version>
     </dependency>
-        
-    <!--     
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>${jackson2.version}</version>
-    </dependency>
-       
-    <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jdk8</artifactId>
-        <version>${jackson2.version}</version>
-    </dependency>
-    
-    <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jsr310</artifactId>
-        <version>${jackson2.version}</version>
-    </dependency> -->
     
     <!-- https://mvnrepository.com/artifact/com.bedatadriven/jackson-datatype-jts -->
     <dependency>

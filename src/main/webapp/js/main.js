@@ -5,7 +5,7 @@
 window.addEventListener('DOMContentLoaded', () => {
   class MapLayer {
     constructor() {
-      this.key = 'FBDFD0B2-17E5-3FE2-8FBF-B2E1A198CE74';
+      this.key = '16E03860-D95C-3547-AE97-52080FC7FFB0';
       this.layer = 'Base';
       this.tileType = 'png';
       this.centerPnt = ol.proj.fromLonLat([127.085851, 37.537097]);
@@ -59,7 +59,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     composeTile() {
       const wmts = this.setVWorldUrl('http://api.vworld.kr/req/wmts/1.0.0/{key}/{layer}/{z}/{y}/{x}.{tileType}');
-      const tms = this.setVWorldUrl('http://api.vworld.kr/req/tms/1.0.0/{key}/{layer}/{z}/{y}/{x}.{tileType}');
 
       const tile = new ol.layer.Tile({
         source: new ol.source.XYZ({
