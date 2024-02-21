@@ -13,7 +13,7 @@
     <spring.version>4.3.5.RELEASE</spring.version>
     <security.version>4.2.14.RELEASE</security.version>
     <jackson2.version>2.9.9</jackson2.version>
-    <postgresql.version>42.2.5</postgresql.version>
+    <postgresql.version>42.7.2</postgresql.version>
     <postgis.version>2.3.0</postgis.version>
     <geotools.version>23.0</geotools.version>
     <hibernate.version>5.4.4.Final</hibernate.version>
